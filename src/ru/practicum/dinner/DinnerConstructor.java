@@ -2,13 +2,14 @@ package ru.practicum.dinner;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class DinnerConstructor {
     HashMap<String, ArrayList<String>> dinnerMenu = new HashMap<>();
+    HashMap<Integer, ArrayList<String>> generatedMenu = new HashMap<>();
     ArrayList<String> contentOfType = new ArrayList<>();
     Random random = new Random();
-    int randomNumb = random.nextInt();
 
     public void addNewDinner(String dishType, String dishName) {
         if (dinnerMenu.containsKey(dishType)) {
@@ -27,15 +28,18 @@ public class DinnerConstructor {
             contentOfType = dinnerMenu.get(nextItem);
             String randomDish = contentOfType.get(random.nextInt(contentOfType.size()));
 
-            HashMap<String, ArrayList<String>> generatedMenu = new HashMap<>();
-            ArrayList<String> generatedList = new ArrayList<>();
-
+            ArrayList<String> generatedList = generatedMenu.getOrDefault(i, new ArrayList<>());
             generatedList.add(randomDish);
-            generatedMenu.put(nextItem, generatedList);
-            generatedList = generatedMenu.get(nextItem);
-            System.out.println("Комбо " + (i + 1));
-            System.out.println(generatedList);
+            generatedMenu.put(i, generatedList);
         }
     }
 
+    public void printCombos() {
+        for (Map.Entry<Integer, ArrayList<String>> entry : generatedMenu.entrySet()) {
+            int number = entry.getKey() + 1;
+            System.out.println("Комбо # " + number);
+            System.out.println(entry.getValue());
+        }
+        generatedMenu = new HashMap<>();
+    }
 }

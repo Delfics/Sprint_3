@@ -1,14 +1,11 @@
 package ru.practicum.dinner;
 
-import java.util.ArrayList;
-import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
 
     static DinnerConstructor dc;
     static Scanner scanner;
-    Random random = new Random();
 
     public static void main(String[] args) {
         dc = new DinnerConstructor();
@@ -57,14 +54,17 @@ public class Main {
 
         System.out.println("Вводите типы блюда, разделяя символом переноса строки (enter)." +
                 " Для завершения ввода введите пустую строку");
-        String nextItem = scanner.nextLine();
+
+        while(true) {
+            String line = scanner.nextLine();
+            if (line.isEmpty()) {
+                break;
+            }
+            dc.generateDinner(line, numberOfCombos);
+        }
 
         //реализуйте ввод типов блюд
-        while (!nextItem.isEmpty()) {
-            dc.generateDinner(nextItem, numberOfCombos);
-            nextItem = "";
-
-        }
+        dc.printCombos();
 
         // сгенерируйте комбинации блюд и выведите на экран
 
