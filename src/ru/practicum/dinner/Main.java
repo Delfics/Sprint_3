@@ -42,7 +42,6 @@ public class Main {
         String dishName = scanner.nextLine();
         dc.addNewDinner(dishType, dishName);
 
-        // добавьте новое блюдо
     }
 
     private static void generateDishCombo() {
@@ -55,18 +54,16 @@ public class Main {
         System.out.println("Вводите типы блюда, разделяя символом переноса строки (enter)." +
                 " Для завершения ввода введите пустую строку");
 
-        while(true) {
+        while (true) {
             String line = scanner.nextLine();
             if (line.isEmpty()) {
                 break;
+            } else if (!dc.dinnerMenu.containsKey(line)) {
+                System.out.println("Такого типа блюда нет в меню, введите существующий тип блюда.");
+                continue;
             }
             dc.generateDinner(line, numberOfCombos);
         }
-
-        //реализуйте ввод типов блюд
         dc.printCombos();
-
-        // сгенерируйте комбинации блюд и выведите на экран
-
     }
 }

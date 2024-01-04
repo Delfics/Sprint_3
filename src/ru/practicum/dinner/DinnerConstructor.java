@@ -20,14 +20,12 @@ public class DinnerConstructor {
             contentOfType.add(dishName);
             dinnerMenu.put(dishType, contentOfType);
         }
-        System.out.println(dinnerMenu);
     }
 
     public void generateDinner(String nextItem, int numberOfCombos) {
         for (int i = 0; i < numberOfCombos; i++) {
             contentOfType = dinnerMenu.get(nextItem);
             String randomDish = contentOfType.get(random.nextInt(contentOfType.size()));
-
             ArrayList<String> generatedList = generatedMenu.getOrDefault(i, new ArrayList<>());
             generatedList.add(randomDish);
             generatedMenu.put(i, generatedList);
@@ -37,9 +35,11 @@ public class DinnerConstructor {
     public void printCombos() {
         for (Map.Entry<Integer, ArrayList<String>> entry : generatedMenu.entrySet()) {
             int number = entry.getKey() + 1;
-            System.out.println("Комбо # " + number);
+
+            System.out.println("Комбо  " + number);
             System.out.println(entry.getValue());
         }
         generatedMenu = new HashMap<>();
     }
+
 }
